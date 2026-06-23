@@ -9,7 +9,7 @@ interface MongooseCache {
 
 const globalWithMongoose = global as typeof globalThis & { mongoose?: MongooseCache };
 
-let cached: MongooseCache = globalWithMongoose.mongoose || { conn: null, promise: null };
+const cached: MongooseCache = globalWithMongoose.mongoose || { conn: null, promise: null };
 
 if (!globalWithMongoose.mongoose) {
   globalWithMongoose.mongoose = cached;
