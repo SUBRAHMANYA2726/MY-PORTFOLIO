@@ -61,6 +61,27 @@ interface GitHubRepo {
   forks_count: number
 }
 
+const languageColors: Record<string, string> = {
+  Python: "#3572A5",
+  JavaScript: "#f1e05a",
+  TypeScript: "#3178c6",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  Jupyter: "#DA5B0B",
+  "Jupyter Notebook": "#DA5B0B",
+  Shell: "#89e051",
+  Dart: "#00B4AB",
+  Kotlin: "#A97BFF",
+  Swift: "#F05138",
+  Go: "#00ADD8",
+  Rust: "#dea584",
+  Ruby: "#701516",
+  PHP: "#4F5D95",
+}
+
 function TiltCard({ project }: { project: Project }) {
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
@@ -129,16 +150,19 @@ export function ProjectsSection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("https://api.github.com/users/SUBRAHMANYA2726/repos?sort=updated")
+    fetch("https://api.github.com/users/SUBRAHMANYA2726/repos?sort=created&direction=desc&per_page=100")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          setGithubRepos(data)
+          // Exclude the portfolio repo itself and forks
+          const filtered = data.filter(
+            (repo: GitHubRepo) => repo.name !== "MY-PORTFOLIO" && !repo.name.startsWith(".")
+          )
+          setGithubRepos(filtered)
         }
         setLoading(false)
       })
-      .catch((err) => {
-        console.error(err)
+      .catch(() => {
         setLoading(false)
       })
   }, [])
@@ -230,7 +254,7 @@ export function ProjectsSection() {
                 
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-blue-500" />
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: languageColors[repo.language || ""] || "#6366f1" }} />
                     <span>{repo.language || "Multiple"}</span>
                   </div>
                   <div className="flex items-center gap-4">
@@ -242,6 +266,24 @@ export function ProjectsSection() {
             ))}
           </div>
         )}
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="https://github.com/SUBRAHMANYA2726?tab=repositories"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 border border-primary/30 text-primary rounded-full hover:bg-primary/20 hover:border-primary/50 transition-all font-medium"
+          >
+            <Github size={20} />
+            View All Repositories on GitHub
+          </a>
+        </motion.div>
       </div>
     </section>
   )
