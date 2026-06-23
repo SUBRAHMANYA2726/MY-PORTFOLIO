@@ -1,6 +1,6 @@
 "use client"
 import { Heart } from "lucide-react";
-import { FaGithub as Github, FaLinkedin as Linkedin, FaTwitter as Twitter } from "react-icons/fa";
+import { FaGithub as Github, FaLinkedin as Linkedin } from "react-icons/fa";
 
 
 export function Footer() {

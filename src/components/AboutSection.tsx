@@ -40,10 +40,10 @@ export function AboutSection() {
               driven by a relentless curiosity for <span className="text-primary font-medium">Artificial Intelligence</span>, <span className="text-blue-400 font-medium">Machine Learning</span>, and innovative problem-solving.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              My journey in technology is defined by a commitment to building practical solutions that make a real-world impact. Whether I'm developing predictive models for healthcare or crafting engaging full-stack web applications, I thrive on turning complex challenges into elegant, efficient solutions.
+              My journey in technology is defined by a commitment to building practical solutions that make a real-world impact. Whether I&apos;m developing predictive models for healthcare or crafting engaging full-stack web applications, I thrive on turning complex challenges into elegant, efficient solutions.
             </p>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              I am eager to bridge the gap between theoretical knowledge and industry practices, constantly expanding my skill set to stay ahead in the ever-evolving tech landscape. Let's build the future together.
+              I am eager to bridge the gap between theoretical knowledge and industry practices, constantly expanding my skill set to stay ahead in the ever-evolving tech landscape. Let&apos;s build the future together.
             </p>
           </motion.div>
 

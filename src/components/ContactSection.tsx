@@ -28,7 +28,7 @@ export function ContactSection() {
       } else {
         alert(data.error || "Failed to send message")
       }
-    } catch (err) {
+    } catch {
       alert("Something went wrong. Please try again.")
     } finally {
       setLoading(false)
@@ -58,7 +58,7 @@ export function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-2xl font-bold mb-6 text-foreground">Let's Connect</h3>
+            <h3 className="text-2xl font-bold mb-6 text-foreground">Let&apos;s Connect</h3>
             <p className="text-muted-foreground mb-8">
               Whether you have a question, want to collaborate on a project, or simply want to say hello, feel free to drop a message.
             </p>

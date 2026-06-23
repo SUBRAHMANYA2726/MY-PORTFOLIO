@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
+import Image from "next/image"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { ExternalLink } from "lucide-react";
 import { FaGithub as Github } from "react-icons/fa";
@@ -40,7 +41,27 @@ const projects = [
   }
 ]
 
-function TiltCard({ project }: { project: any }) {
+interface Project {
+  title: string
+  description: string
+  tech: string[]
+  github: string
+  live: string
+  image: string
+}
+
+interface GitHubRepo {
+  id: number
+  name: string
+  description: string | null
+  html_url: string
+  homepage: string | null
+  language: string | null
+  stargazers_count: number
+  forks_count: number
+}
+
+function TiltCard({ project }: { project: Project }) {
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -76,7 +97,7 @@ function TiltCard({ project }: { project: any }) {
       className="relative h-[400px] w-full rounded-2xl bg-card border border-border/50 overflow-hidden cursor-pointer group shadow-xl"
     >
       <div className="absolute inset-0 z-0">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+        <Image src={project.image} alt={project.title} fill className="object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500" unoptimized />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
       
@@ -104,7 +125,7 @@ function TiltCard({ project }: { project: any }) {
 }
 
 export function ProjectsSection() {
-  const [githubRepos, setGithubRepos] = useState<any[]>([])
+  const [githubRepos, setGithubRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

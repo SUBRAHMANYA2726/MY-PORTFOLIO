@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { MessageSquare, X, Send, Bot } from "lucide-react";
+import { X, Send, Bot } from "lucide-react";
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false)
