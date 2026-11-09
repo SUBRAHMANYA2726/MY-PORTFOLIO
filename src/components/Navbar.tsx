@@ -1,87 +1,120 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Work", href: "#featured" },
+  { name: "Skills", href: "#skills" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Contact", href: "#contact" },
-  ]
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border shadow-lg" : "bg-transparent"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex-shrink-0 flex items-center">
-            <span className="font-heading font-bold text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 cursor-pointer">
-              Subbu.ai
+    <nav
+      aria-label="Primary"
+      className={`fixed top-0 z-50 w-full border-b transition-colors duration-300 ${
+        isScrolled ? "border-[#E3D9CF] bg-[#F4EFE7]/95" : "border-transparent bg-[#F4EFE7]"
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="flex h-16 items-center justify-between gap-4 sm:h-[72px]">
+          <a href="#home" className="flex min-h-[44px] items-center gap-3" aria-label="Subrahmanya Bhat — home">
+            <span className="font-display flex size-10 items-center justify-center rounded-full border border-[#28221E] bg-[#28221E] text-sm font-semibold tracking-tight text-[#FBF9F5]">
+              SB.
             </span>
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
+            <span className="hidden flex-col leading-tight sm:flex">
+              <span className="text-sm font-semibold tracking-tight text-[#28221E]">Subrahmanya Bhat</span>
+              <span className="text-[11px] tracking-[0.14em] text-[#756B62] uppercase">AI · ML · Software</span>
+            </span>
+          </a>
+
+          <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="flex min-h-[44px] items-center rounded-full px-3.5 text-sm font-medium text-[#756B62] transition-colors hover:bg-[#28221E]/[0.06] hover:text-[#28221E] focus-visible:ring-2 focus-visible:ring-[#B64A32] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4EFE7] focus-visible:outline-none"
               >
                 {link.name}
               </a>
             ))}
+            <Button
+              size="sm"
+              className="ml-2"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              aria-label="Go to contact section"
+            >
+              Let&apos;s Talk
+              <ArrowUpRight className="size-4" />
+            </Button>
           </div>
 
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-foreground hover:text-primary transition-colors"
+          <div className="md:hidden">
+            <Button
+              variant="icon"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+              {isMobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-[#E3D9CF] bg-[#F4EFE7] md:hidden"
           >
-            <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+            <div className="space-y-1 px-4 py-3">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                  className="flex min-h-[44px] items-center rounded-xl px-3 text-base font-medium text-[#28221E] transition-colors hover:bg-[#28221E]/[0.06] focus-visible:ring-2 focus-visible:ring-[#B64A32] focus-visible:outline-none"
                 >
                   {link.name}
                 </a>
               ))}
+              <div className="px-3 pt-2 pb-1">
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  aria-label="Go to contact section"
+                >
+                  Let&apos;s Talk
+                  <ArrowUpRight className="size-4" />
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </nav>
-  )
+  );
 }

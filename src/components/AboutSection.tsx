@@ -1,70 +1,105 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Code, Trophy, Cpu, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
-const stats = [
-  { label: "Projects Completed", value: "10+", icon: Code },
-  { label: "Hackathons Participated", value: "4", icon: Trophy },
-  { label: "Skills Mastered", value: "20+", icon: Cpu },
-  { label: "Certifications Earned", value: "5+", icon: Award },
-]
+const focusAreas = [
+  "AI and Machine Learning",
+  "Full-stack software development",
+  "Public policy",
+  "Archaeology and Indian history",
+  "Psychology",
+  "Geopolitics",
+];
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-background/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="about" className="border-t border-[#E3D9CF] py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="mb-10 max-w-2xl"
         >
-          <h2 className="text-3xl md:text-5xl font-bold font-heading mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">
-            About Me
+          <p className="eyebrow">About Me</p>
+          <h2 className="font-display mt-3 text-3xl font-medium tracking-tight text-balance text-[#28221E] sm:text-4xl">
+            An engineer with a historian&apos;s curiosity.
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-blue-500 mx-auto rounded-full" />
+          <div className="editorial-rule mt-5 w-16" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="prose prose-invert prose-lg"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.45 }}
+            className="space-y-4 text-[15px] leading-relaxed text-[#756B62] sm:text-base"
           >
-            <p className="text-muted-foreground leading-relaxed">
-              I am a passionate <span className="text-foreground font-semibold">B.Tech student at Presidency University, Bengaluru</span>,
-              driven by a relentless curiosity for <span className="text-primary font-medium">Artificial Intelligence</span>, <span className="text-blue-400 font-medium">Machine Learning</span>, and innovative problem-solving.
+            <p>
+              I&apos;m <strong className="font-semibold text-[#28221E]">Subrahmanya Manjunatha Bhat</strong>,
+              an Information Science and Engineering student at{" "}
+              <strong className="font-semibold text-[#28221E]">Presidency University, Bengaluru</strong>.
+              My work sits at the intersection of <strong className="font-semibold text-[#28221E]">AI and machine learning</strong>{" "}
+              and <strong className="font-semibold text-[#28221E]">full-stack software development</strong> — building
+              prototypes that are useful, legible and maintainable, from agricultural intelligence for farmers to
+              accessibility-minded tools for students.
             </p>
-            <p className="text-muted-foreground leading-relaxed mt-4">
-              My journey in technology is defined by a commitment to building practical solutions that make a real-world impact. Whether I&apos;m developing predictive models for healthcare or crafting engaging full-stack web applications, I thrive on turning complex challenges into elegant, efficient solutions.
+            <p>
+              Alongside code, I read and write about public policy, archaeology and Indian history, psychology and
+              geopolitics. Those interests shape the questions I ask and the problems I choose — technology in service
+              of people, with context.
             </p>
-            <p className="text-muted-foreground leading-relaxed mt-4">
-              I am eager to bridge the gap between theoretical knowledge and industry practices, constantly expanding my skill set to stay ahead in the ever-evolving tech landscape. Let&apos;s build the future together.
+            <p>
+              I&apos;m currently deepening my skills in deep learning, applied ML engineering and modern web development,
+              and I&apos;m open to collaboration, research and internship opportunities.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-6">
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-card/50 backdrop-blur-sm p-6 rounded-2xl border border-border hover:border-primary/50 transition-colors group"
-              >
-                <stat.icon className="h-8 w-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
-                <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.45, delay: 0.08 }}
+            className="rounded-3xl border border-[#E3D9CF] bg-[#FBF9F5] p-6 sm:p-7"
+          >
+            <h3 className="text-sm font-semibold tracking-[0.12em] text-[#28221E] uppercase">Focus areas</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#756B62]">
+              Areas I study, build in and keep returning to.
+            </p>
+            <ul className="mt-5 grid grid-cols-1 gap-2.5 min-[480px]:grid-cols-2">
+              {focusAreas.map((area) => (
+                <li
+                  key={area}
+                  className="flex min-h-[44px] items-center rounded-full border border-[#E3D9CF] bg-[#F4EFE7] px-4 text-sm font-medium text-[#28221E]"
+                >
+                  {area}
+                </li>
+              ))}
+            </ul>
+            <div className="editorial-rule my-6" />
+            <dl className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <dt className="text-xs tracking-[0.12em] text-[#756B62] uppercase">Degree</dt>
+                <dd className="mt-1 font-medium text-[#28221E]">Information Science &amp; Engineering</dd>
+              </div>
+              <div>
+                <dt className="text-xs tracking-[0.12em] text-[#756B62] uppercase">University</dt>
+                <dd className="mt-1 font-medium text-[#28221E]">Presidency University, Bengaluru</dd>
+              </div>
+              <div>
+                <dt className="text-xs tracking-[0.12em] text-[#756B62] uppercase">Based in</dt>
+                <dd className="mt-1 font-medium text-[#28221E]">Bengaluru, India</dd>
+              </div>
+              <div>
+                <dt className="text-xs tracking-[0.12em] text-[#756B62] uppercase">Open to</dt>
+                <dd className="mt-1 font-medium text-[#28221E]">Internships · Collaboration</dd>
+              </div>
+            </dl>
+          </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }
